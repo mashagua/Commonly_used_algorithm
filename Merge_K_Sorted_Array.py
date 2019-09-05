@@ -7,8 +7,6 @@ import sys
 import sys
 from typing import List, Optional
 
-Matrix = List[List[int]]
-
 
 class MinHeapNode:
     def __init__(self, el, i, j):
@@ -18,7 +16,7 @@ class MinHeapNode:
 
 
 class MinHeap:
-    def __init__(self, ar: List[MinHeapNode], size: int):
+    def __init__(self, ar, size):
         self.heap_size = size
         self.heap_arr = ar
         i = (self.heap_size - 1) // 2
@@ -26,29 +24,29 @@ class MinHeap:
             self.min_heapify(i)
             i -= 1
 
-        def min_heapify(self, i):
-            l = left(i)
-            r = right(i)
-            smallest = i
-            if l < self.heap_size and self.heap_arr[l].element < self.heap_arr[i].element:
-                smallest = l
-            if r < self.heap_size and self.heap_arr[r].element < self.heap_arr[smallest].element:
-                smallest = r
-            if smallest != i:
-                swap(self.heap_arr, i, smallest)
-                self.min_heapify(smallest)
+    def min_heapify(self, i):
+        l = left(i)
+        r = right(i)
+        smallest = i
+        if l < self.heap_size and self.heap_arr[l].element < self.heap_arr[i].element:
+            smallest = l
+        if r < self.heap_size and self.heap_arr[r].element < self.heap_arr[smallest].element:
+            smallest = r
+        if smallest != i:
+            swap(self.heap_arr, i, smallest)
+            self.min_heapify(smallest)
 
-        def get_min(self) -> Optional:
-            if self.heap_size <= 0:
-                print('Heap underflow')
-                return None
-            return self.heap_arr[0]
+    def get_min(self,):
+        if self.heap_size <= 0:
+            print('Heap underflow')
+            return None
+        return self.heap_arr[0]
 
-            # Replace root with new root
+        # Replace root with new root
 
-        def replace_min(self, root):
-            self.heap_arr[0] = root
-            self.min_heapify(0)
+    def replace_min(self, root):
+        self.heap_arr[0] = root
+        self.min_heapify(0)
 
 def left(i):
     return 2 * i + 1
@@ -56,12 +54,12 @@ def left(i):
 def right(i):
     return 2 * i + 2
 
-def swap(arr: List[MinHeapNode], i, j):
+def swap(arr, i, j):
     temp = arr[i]
     arr[i] = arr[j]
     arr[j] = temp
 
-def merge_k_sorted_arrays(arr: Matrix, k: int):
+def merge_k_sorted_arrays(arr, k):
     h_arr = []
     result_size = 0
     for i in range(len(arr)):
